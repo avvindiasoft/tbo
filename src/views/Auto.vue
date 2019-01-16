@@ -40,7 +40,13 @@
 
           <v-marker :key="auto1" :lat-lng="auto11" :icon="iconAuto">
           </v-marker>
-          <v-marker :key="auto1" :lat-lng="auto21" :icon="iconAuto">
+          <v-marker :key="auto2" :lat-lng="auto21" :icon="iconAuto">
+          </v-marker>
+          <v-marker :key="auto3" :lat-lng="auto31" :icon="iconAuto">
+          </v-marker>
+          <v-marker :key="auto4" :lat-lng="auto41" :icon="iconAuto">
+          </v-marker>
+          <v-marker :key="auto5" :lat-lng="auto51" :icon="iconAuto">
           </v-marker>
         </v-map>
       </div>
@@ -152,18 +158,20 @@
         this.$store.commit('addNotification', {
           type: 'АВАРИЯ',
           text: 'Авария! Автомобиль №'+ auto +'.',
-          date: '09.01.2019.',
+          date: '16.01.2019.',
           address: addr,
           color: 'error'
         });
+
+        this.$store.commit('addNotifsTop', 'Автомобиль №1 попал в аварию! Адрес: ' + addr);
       },
       dumpFunction: function(auto){
-        this.info = 'Автомобиль №'+ auto +' везёт мусор на свалку.';
+        this.info = 'Автомобиль №'+ auto +' доставил мусор на свалку.';
         this.snackbar = true;
         this.$store.commit('addNotification', {
           type: 'НА СВАЛКУ',
           text: 'Автомобиль №'+ auto +' доставил мусор на свалку.',
-          date: '09.01.2019.',
+          date: '16.01.2019.',
           address: '',
           color: 'success'
         });
@@ -197,7 +205,7 @@
             this.$store.commit('addNotification', {
               type: 'УСПЕШНОЕ ПРИБЫТИЕ',
               text: 'Автомобиль №'+ auto +' успешно достиг контейнера №'+ num +'.',
-              date: '09.01.2019.',
+              date: '16.01.2019.',
               address: addr,
               color: 'success'
             });
@@ -247,12 +255,13 @@
 
           if(this.auto21[0] <= b && this.auto21[1] >= d){
             clearInterval(intervalId);
-            this.info = 'Автомобиль №'+ auto +' успешно достиг контейнера №'+ num;
+            this.info = (num === 21) ? 'Автомобиль №'+ auto +' успешно достиг свалки' : 'Автомобиль №'+ auto +' успешно достиг контейнера №'+ num;
             this.snackbar = true;
+
             this.$store.commit('addNotification', {
               type: 'УСПЕШНОЕ ПРИБЫТИЕ',
-              text: 'Автомобиль №'+ auto +' успешно достиг контейнера №'+ num +'.',
-              date: '09.01.2019.',
+              text: (num === 21) ? 'Автомобиль №'+ auto +' достиг свалки' : 'Автомобиль №'+ auto +' успешно достиг контейнера №'+ num +'.',
+              date: '16.01.2019.',
               address: addr,
               color: 'success'
             });
@@ -269,12 +278,37 @@
               }
               if(num === 22){
                 this.autoFunction2(2, 21, 'Свалка', this.move25);
+
+                this.info = 'Автомобиль №'+ auto +' направляется на свалку';
+                this.snackbar = true;
               }
               if(num === 21){
-                this.dumpFunction(2);
+                //this.dumpFunction(2);
               }
             }, 7000);
 
+          }
+        }
+        const intervalId = setInterval(interval, 1000);
+      },
+      autoFunction3: function(){
+        const interval = () => {
+          this.auto31 = [this.moveAutoMinus(this.auto31[0], this.auto32[0]), this.moveAutoMinus(this.auto31[1], this.auto32[1])]
+
+          if(this.auto31[0] <= this.auto32[0] && this.auto31[1] <= this.auto32[1]){
+            clearInterval(intervalId);
+            this.info = 'Автомобиль №3 попал в аварию! Адрес: Шоссе Космонавтов, 111.';
+            this.snackbar = true;
+
+            this.$store.commit('addNotification', {
+              type: 'ВНИМАНИЕ! АВАРИЯ!',
+              text: 'Автомобиль №3 попал в аварию!',
+              date: '16.01.2019.',
+              address: 'Шоссе Космонавтов, 111',
+              color: 'error'
+            });
+
+            this.$store.commit('addNotifsTop', 'Автомобиль №3 попал в аварию! Адрес: Шоссе Космонавтов, 111');
           }
         }
         const intervalId = setInterval(interval, 1000);
@@ -286,22 +320,20 @@
     }),
     data () {
       let locations = [];
-      let alret = true;
-      for (let i = 0; i < 21; i++) {
+      for (let i = 0; i < 19; i++) {
         locations.push({
           id: i,
           latlng: Vue2Leaflet.L.latLng(rand(58.0043), rand(56.2396)),
           text: 'Контейнер №' + i
         })
       }
+
 //27: [58.00997, 56.20199],
       //test
-      /*
 
-
-
-      **/
       const obj = {
+        19: [57.99390, 56.20499],
+        20: [57.99090, 56.20499],
         21: [57.88987, 56.33919],
         22: [57.99087, 56.24919],
         23: [57.99887, 56.24099],
@@ -346,6 +378,10 @@
         auto23: [locations[23].latlng.lat, locations[23].latlng.lng],
         auto24: [locations[22].latlng.lat, locations[22].latlng.lng],
         auto25: [locations[21].latlng.lat, locations[21].latlng.lng],
+        auto31: [58.00001, 56.20699],
+        auto32: [locations[20].latlng.lat, locations[20].latlng.lng],
+        auto41: [58.00001, 56.24999],
+        auto51: [58.01611, 56.23009],
         snackbar: false,
         info: null
       }
@@ -359,26 +395,22 @@
 
       this.autoFunction1(1, 29, 'ул. Ленина, 80', this.move12);
       this.autoFunction2(2, 24, 'ул. Грузинская, 2', this.move22);
+      this.autoFunction3();
 
-      /*
-      const interval = () => {
-        this.auto11 = [this.moveAutoPlus(this.auto11[0], this.auto12[0]), this.moveAutoMinus(this.auto11[1], this.auto12[1])];
+      setTimeout(() => {
+        this.info = 'Возгорание контейнера №19! Адрес: ул. Кронштадтская, 88.';
+        this.snackbar = true;
 
-        if(this.auto11[0] >= b && this.auto11[1] <= d){
-          clearInterval(intervalId);
-          this.info = 'Автомобиль №1 добрался до контейнера №29';
-          this.snackbar = true;
-          this.$store.commit('addNotification', {
-            type: 'УСПЕШНОЕ ПРИБЫТИЕ',
-            text: 'Автомобиль №1 добрался до контейнера №29.',
-            date: '09.01.2019.',
-            address: 'ул. Монастырская, 14',
-            color: 'success'
-          });
-        }
-      }
-      const intervalId = setInterval(interval,1000);
-      */
+        this.$store.commit('addNotification', {
+          type: 'ВНИМАНИЕ! ВОЗГОРАНИЕ!',
+          text: 'Возгорание контейнера №19!',
+          date: '16.01.2019.',
+          address: 'ул. Кронштадтская, 88',
+          color: 'error'
+        });
+
+        this.$store.commit('addNotifsTop', 'Возгорание контейнера №19! Адрес: ул. Кронштадтская, 88');
+      }, 19000);
 
       setTimeout(() => {
         console.log('done')

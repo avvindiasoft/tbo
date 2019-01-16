@@ -4,6 +4,7 @@
 export default {
   markers: [
     {
+      number: 1,
       coords: [58.00218, 56.23720],
       icon: 'red',
       title: 'Контейнер №1',
@@ -11,27 +12,31 @@ export default {
       img: '01.jpg'
     },
     {
+      number: 2,
       coords: [58.00623, 56.23378],
       icon: 'green',
       title: 'Контейнер №2',
-      percent: 15,
+      percent: 35,
       img: '02.jpg'
     },
     {
+      number: 3,
       coords: [58.00613, 56.25389],
       icon: 'black',
       title: 'Контейнер №3',
-      percent: 0,
+      percent: 30,
       img: '03.jpg'
     },
     {
+      number: 4,
       coords: [58.00623, 56.24378],
       icon: 'green',
       title: 'Контейнер №4',
-      percent: 25,
+      percent: 45,
       img: '04.jpg'
     },
     {
+      number: 5,
       coords: [58.00200, 56.24348],
       icon: 'red',
       title: 'Контейнер №5',
@@ -39,13 +44,15 @@ export default {
       img: '05.jpg'
     },
     {
+      number: 6,
       coords: [58.00723, 56.23898],
       icon: 'blue',
       title: 'Контейнер №6',
-      percent: 50,
+      percent: 59,
       img: '06.jpg'
     },
     {
+      number: 7,
       coords: [58.00203, 56.23000],
       icon: 'green',
       title: 'Контейнер №7',
@@ -53,31 +60,179 @@ export default {
       img: '07.jpg'
     },
     {
+      number: 8,
       coords: [58.00503, 56.24000],
       icon: 'green',
       title: 'Контейнер №8',
-      percent: 10,
+      percent: 80,
       img: '07.jpg'
     },
     {
+      number: 9,
       coords: [58.00203, 56.23000],
       icon: 'green',
       title: 'Контейнер №9',
-      percent: 10,
+      percent: 30,
       img: '07.jpg'
     },
     {
+      number: 10,
       coords: [58.00203, 56.23000],
       icon: 'green',
       title: 'Контейнер №10',
-      percent: 10,
+      percent: 25,
       img: '07.jpg'
     },
     {
+      number: 11,
       coords: [58.00203, 56.23000],
       icon: 'green',
       title: 'Контейнер №11',
-      percent: 10,
+      percent: 28,
+      img: '07.jpg'
+    },
+    {
+      number: 12,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №12',
+      percent: 23,
+      img: '07.jpg'
+    },
+    {
+      number: 13,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №13',
+      percent: 34,
+      img: '07.jpg'
+    },
+    {
+      number: 14,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №14',
+      percent: 48,
+      img: '07.jpg'
+    },
+    {
+      number: 15,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №15',
+      percent: 27,
+      img: '07.jpg'
+    },
+    {
+      number: 16,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №16',
+      percent: 12,
+      img: '07.jpg'
+    },
+    {
+      number: 17,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №17',
+      percent: 32,
+      img: '07.jpg'
+    },
+    {
+      number: 18,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №18',
+      percent: 20,
+      img: '07.jpg'
+    },
+    {
+      number: 19,
+      coords: [57.99390, 56.20499],
+      icon: 'green',
+      title: 'Контейнер №19',
+      percent: 28,
+      img: '07.jpg'
+    },
+    {
+      number: 20,
+      coords: [57.99090, 56.20499],
+      icon: 'green',
+      title: 'Контейнер №20',
+      percent: 28,
+      img: '07.jpg'
+    },
+    {
+      number: 21,
+      coords: [57.88987, 56.33919],
+      icon: 'green',
+      title: 'Контейнер №21',
+      percent: 214,
+      img: '07.jpg'
+    },
+    {
+      number: 22,
+      coords: [57.99087, 56.24919],
+      icon: 'green',
+      title: 'Контейнер №22',
+      percent: 16,
+      img: '07.jpg'
+    },
+    {
+      number: 23,
+      coords: [57.99887, 56.24099],
+      icon: 'green',
+      title: 'Контейнер №23',
+      percent: 7,
+      img: '07.jpg'
+    },
+    {
+      number: 24,
+      coords: [58.00087, 56.20999],
+      icon: 'green',
+      title: 'Контейнер №24',
+      percent: 19,
+      img: '07.jpg'
+    },
+    {
+      number: 25,
+      coords: [58.00799, 56.16901],
+      icon: 'green',
+      title: 'Контейнер №25',
+      percent: 2,
+      img: '07.jpg'
+    },
+    {
+      number: 26,
+      coords: [58.00697, 56.19401],
+      icon: 'green',
+      title: 'Контейнер №26',
+      percent: 50,
+      img: '07.jpg'
+    },
+    {
+      number: 27,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №27',
+      percent: 41,
+      img: '07.jpg'
+    },
+    {
+      number: 28,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №28',
+      percent: 35,
+      img: '07.jpg'
+    },
+    {
+      number: 29,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №29',
+      percent: 18,
       img: '07.jpg'
     }
   ],
@@ -121,55 +276,76 @@ export default {
   history: [
     {
       date: '12:00',
-      percent: 75
+      percent: 75,
+      carsCount: 6
     },
     {
       date: '13:00',
-      percent: 70
+      percent: 70,
+      carsCount: 9
     },
     {
       date: '14:00',
-      percent: 63
+      percent: 63,
+      carsCount: 11
     },
     {
       date: '15:00',
-      percent: 51
+      percent: 51,
+      carsCount: 10
     },
     {
       date: '16:00',
-      percent: 66
+      percent: 66,
+      carsCount: 12
     },
     {
       date: '17:00',
-      percent: 68
+      percent: 68,
+      carsCount: 14
     },
     {
       date: '18:00',
-      percent: 61
+      percent: 61,
+      carsCount: 18
     }
-  ]
-}
-
-
-
-/*
-export default {
+  ],
   notifications: [
+    {
+      type: 'ПОВРЕЖДЕНИЕ АВТОМОБИЛЯ',
+      text: 'Автомобиль №4 сломан.',
+      date: '16.01.2019.',
+      address: 'ул. Окулова, 5',
+      color: 'black'
+    },
+    {
+      type: 'ПРОСТОЙ АВТОМОБИЛЯ',
+      text: 'Автомобиль №5 простаивает более 2 часов.',
+      date: '16.01.2019.',
+      address: 'Косомольский просект, 60',
+      color: 'warning'
+    },
     {
       type: 'ЗАПОЛНЕННЫЙ КОНТЕЙНЕР',
       text: 'Процент заполненности контейнера №29 составляет 90%.',
-      date: '09.01.2019.',
+      date: '16.01.2019.',
       address: 'ул. Монастырская, 14',
       color: 'error'
     },
     {
       type: 'ПОВРЕЖДЕНИЕ ДАТЧИКА',
       text: 'Повреждён датчик контейнера №3 (сквер у строения "Дом чекистов").',
-      date: '08.01.2019.',
+      date: '16.01.2019.',
       address: 'ул. Сибирская, 32',
       color: 'black'
     }
+  ],
+  notifsTop: [
+    'Автомобиль №4 сломан',
+    'Автомобиль №5 простаивает более 2 часов',
+    'Повреждён датчик контейнера №3 (сквер у строения "Дом чекистов")'
+  ],
 
-  ]
 }
-*/
+
+

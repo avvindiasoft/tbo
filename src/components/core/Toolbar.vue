@@ -63,7 +63,7 @@
               overlap
             >
               <template slot="badge">
-                {{ notifications.length }}
+                {{ this.$store.state.notifsTop.length }}
               </template>
               <v-icon color="tertiary">mdi-bell</v-icon>
             </v-badge>
@@ -71,7 +71,7 @@
           <v-card>
             <v-list dense>
               <v-list-tile
-                v-for="notification in notifications"
+                v-for="notification in this.$store.state.notifsTop"
                 :key="notification"
                 @click="onClick"
               >
@@ -100,7 +100,7 @@
 
 import {
   mapMutations
-} from 'vuex'
+} from 'vuex';
 
 export default {
   data: () => ({
@@ -140,6 +140,7 @@ export default {
   },
 
   mounted () {
+    console.log(this.$store.state.notifsTop);
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
   },
