@@ -1,4 +1,5 @@
 // https://vuex.vuejs.org/en/state.html
+// https://vuex.vuejs.org/en/state.html
 
 export default {
   markers: [
@@ -148,3 +149,27 @@ export default {
     }
   ]
 }
+
+
+
+/*
+export default {
+  notifications: [
+    {
+      type: 'ЗАПОЛНЕННЫЙ КОНТЕЙНЕР',
+      text: 'Процент заполненности контейнера №29 составляет 90%.',
+      date: '09.01.2019.',
+      address: 'ул. Монастырская, 14',
+      color: 'error'
+    },
+    {
+      type: 'ПОВРЕЖДЕНИЕ ДАТЧИКА',
+      text: 'Повреждён датчик контейнера №3 (сквер у строения "Дом чекистов").',
+      date: '08.01.2019.',
+      address: 'ул. Сибирская, 32',
+      color: 'black'
+    }
+
+  ]
+}
+*/

@@ -395,153 +395,153 @@
 </template>
 
 <script>
-import store from '@/store'
+  import store from '@/store'
 
-export default {
-  data () {
-    let markers = store.state.markers
-    let cars = store.state.cars
-    cars = cars.map((car) => {
-      car.isDefected = car.isDefected ? 'Поврежден' : 'Целый'
-      car.isOnRoute = car.isOnRoute ? 'На маршруте' : 'В ожидании'
-      return car
-    })
-    console.log(cars)
-    let history = store.state.history
-    let avg = (markers.map(data => data['percent'])
-      .reduce((prev, curr) => prev + curr, 0) / markers.length)
-      .toFixed(2)
-    return {
-      dailySalesChart: {
-        data: {
-          labels: history.map((el) => (el.date)),
-          series: [
-            history.map((el) => (el.percent))
-          ]
-        },
-        options: {
-          lineSmooth: this.$chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
-      },
-      dataCompletedTasksChart: {
-        data: {
-          labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-          series: [
-            [230, 750, 450, 300, 280, 240, 200, 190]
-          ]
-        },
-        options: {
-          lineSmooth: this.$chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
-      },
-      emailsSubscriptionChart: {
-        data: {
-          labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
-          series: [
-            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-          ]
-        },
-        options: {
-          axisX: {
-            showGrid: false
+  export default {
+    data () {
+      let markers = store.state.markers
+      let cars = store.state.cars
+      cars = cars.map((car) => {
+        car.isDefected = car.isDefected ? 'Поврежден' : 'Целый'
+        car.isOnRoute = car.isOnRoute ? 'На маршруте' : 'В ожидании'
+        return car
+      })
+      console.log(cars)
+      let history = store.state.history
+      let avg = (markers.map(data => data['percent'])
+        .reduce((prev, curr) => prev + curr, 0) / markers.length)
+        .toFixed(2)
+      return {
+        dailySalesChart: {
+          data: {
+            labels: history.map((el) => (el.date)),
+            series: [
+              history.map((el) => (el.percent))
+            ]
           },
-          low: 0,
-          high: 1000,
-          chartPadding: {
-            top: 0,
-            right: 5,
-            bottom: 0,
-            left: 0
+          options: {
+            lineSmooth: this.$chartist.Interpolation.cardinal({
+              tension: 0
+            }),
+            low: 0,
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            chartPadding: {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0
+            }
           }
         },
-        responsiveOptions: [
-          ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-              labelInterpolationFnc: function (value) {
-                return value[0]
-              }
+        dataCompletedTasksChart: {
+          data: {
+            labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
+            series: [
+              [230, 750, 450, 300, 280, 240, 200, 190]
+            ]
+          },
+          options: {
+            lineSmooth: this.$chartist.Interpolation.cardinal({
+              tension: 0
+            }),
+            low: 0,
+            high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            chartPadding: {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0
             }
-          }]
-        ]
-      },
-      dataAveragePercent: avg,
-      headers: [
-        {
-          sortable: false,
-          text: 'ID',
-          value: 'id'
+          }
         },
-        {
-          sortable: false,
-          text: 'Наименование',
-          value: 'title'
+        emailsSubscriptionChart: {
+          data: {
+            labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
+            series: [
+              [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+            ]
+          },
+          options: {
+            axisX: {
+              showGrid: false
+            },
+            low: 0,
+            high: 1000,
+            chartPadding: {
+              top: 0,
+              right: 5,
+              bottom: 0,
+              left: 0
+            }
+          },
+          responsiveOptions: [
+            ['screen and (max-width: 640px)', {
+              seriesBarDistance: 5,
+              axisX: {
+                labelInterpolationFnc: function (value) {
+                  return value[0]
+                }
+              }
+            }]
+          ]
         },
-        {
-          sortable: false,
-          text: 'Загруженность',
-          value: 'percent',
-          align: 'right'
+        dataAveragePercent: avg,
+        headers: [
+          {
+            sortable: false,
+            text: 'ID',
+            value: 'id'
+          },
+          {
+            sortable: false,
+            text: 'Наименование',
+            value: 'title'
+          },
+          {
+            sortable: false,
+            text: 'Загруженность',
+            value: 'percent',
+            align: 'right'
+          }
+        ],
+        headersCars: [
+          {
+            sortable: true,
+            text: 'ID',
+            value: 'id'
+          },
+          {
+            sortable: true,
+            text: 'Статус',
+            value: 'status'
+          },
+          {
+            sortable: true,
+            text: 'Загруженность',
+            value: 'percent',
+            align: 'right'
+          },
+          {
+            sortable: false,
+            text: 'Состояние',
+            value: 'isDefected',
+            align: 'center'
+          }
+        ],
+        items: markers,
+        cars: cars,
+        tabs: 0,
+        list: {
+          0: false,
+          1: false,
+          2: false
         }
-      ],
-      headersCars: [
-        {
-          sortable: true,
-          text: 'ID',
-          value: 'id'
-        },
-        {
-          sortable: true,
-          text: 'Статус',
-          value: 'status'
-        },
-        {
-          sortable: true,
-          text: 'Загруженность',
-          value: 'percent',
-          align: 'right'
-        },
-        {
-          sortable: false,
-          text: 'Состояние',
-          value: 'isDefected',
-          align: 'center'
-        }
-      ],
-      items: markers,
-      cars: cars,
-      tabs: 0,
-      list: {
-        0: false,
-        1: false,
-        2: false
+      }
+    },
+    methods: {
+      complete (index) {
+        this.list[index] = !this.list[index]
       }
     }
-  },
-  methods: {
-    complete (index) {
-      this.list[index] = !this.list[index]
-    }
   }
-}
 </script>

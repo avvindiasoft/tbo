@@ -152,7 +152,7 @@ export default {
     onClickBtn () {
       this.setDrawer(!this.$store.state.app.drawer)
     },
-    onClick () {
+    onClick (){
       //
     },
     onResponsiveInverted () {

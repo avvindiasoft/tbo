@@ -13,23 +13,15 @@
   <div class="mapouter">
     <div class="gmap_canvas">
       <div id="app">
-        <v-map
-          :zoom="12"
-          :center="initialLocation">
-          <v-icondefault/>
-          <v-tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"/>
-          <v-marker-cluster
-            :options="clusterOptions"
-            @clusterclick="click()">
-            <v-marker
-              v-for="l in locations"
-              :key="l.id"
-              :lat-lng="l.latlng"
-              :icon="icon">
-              <v-popup :content="l.text"/>
-            </v-marker>
-          </v-marker-cluster>
-        </v-map>
+  <v-map :zoom=12 :center="initialLocation">
+    <v-icondefault></v-icondefault>
+    <v-tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tilelayer>
+    <v-marker-cluster :options="clusterOptions" @clusterclick="click()">
+      <v-marker v-for="l in locations" :key="l.id" :lat-lng="l.latlng" :icon="icon">
+        <v-popup :content="l.text"></v-popup>
+      </v-marker>
+    </v-marker-cluster>
+  </v-map>
       </div>
     </div>
   </div>
@@ -49,6 +41,7 @@
   width:100%;
 }
 </style>
+
 <!--
 <script>
   import L from 'leaflet';
@@ -143,60 +136,62 @@
   }
 </style>
 
-<script>
-import * as Vue2Leaflet from 'vue2-leaflet'
-import Vue2LeafletMarkercluster from 'vue2-leaflet-markercluster'
-import iconUrl from 'leaflet/dist/images/marker-icon.png'
-import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
 
-function rand (n) {
-  let max = n + 0.1
-  let min = n - 0.1
-  return Math.random() * (max - min) + min
-}
-export default {
-  components: {
-    'v-map': Vue2Leaflet.LMap,
-    'v-tilelayer': Vue2Leaflet.LTileLayer,
-    'v-icondefault': Vue2Leaflet.LIconDefault,
-    'v-marker': Vue2Leaflet.LMarker,
-    'v-popup': Vue2Leaflet.LPopup,
-    'v-marker-cluster': Vue2LeafletMarkercluster
-  },
-  data () {
-    let locations = []
-    for (let i = 0; i < 30; i++) {
-      locations.push({
-        id: i,
-        latlng: Vue2Leaflet.L.latLng(rand(58.0043), rand(56.2396)),
-        text: 'Контейнер №' + i
-      })
-    }
-    let icon = Vue2Leaflet.L.icon(Object.assign({},
-      Vue2Leaflet.L.Icon.Default.prototype.options,
-      { iconUrl, shadowUrl }
-    ))
-    return {
-      locations,
-      icon,
-      clusterOptions: {},
-      initialLocation: Vue2Leaflet.L.latLng(58.0043, 56.2396)
-    }
-  },
-  mounted () {
-    setTimeout(() => {
-      console.log('done')
-      this.$nextTick(() => {
-        this.clusterOptions = { disableClusteringAtZoom: 20 }
-      })
-    }, 5000)
-  },
-  methods: {
-    click: function (e) {
-      // alert("clusterclick")
+
+<script>
+  import * as Vue2Leaflet from 'vue2-leaflet';
+  import Vue2LeafletMarkercluster from 'vue2-leaflet-markercluster';
+  import iconUrl from 'leaflet/dist/images/marker-icon.png';
+  import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+
+  function rand(n) {
+    let max = n + 0.1
+    let min = n - 0.1
+    return Math.random() * (max - min) + min;
+  }
+  export default {
+    components: {
+      'v-map': Vue2Leaflet.LMap,
+      'v-tilelayer': Vue2Leaflet.LTileLayer,
+      'v-icondefault': Vue2Leaflet.LIconDefault,
+      'v-marker': Vue2Leaflet.LMarker,
+      'v-popup': Vue2Leaflet.LPopup,
+      'v-marker-cluster': Vue2LeafletMarkercluster
+    },
+    methods: {
+      click: function (e) {
+        //alert("clusterclick")
+      }
+    },
+    data () {
+      let locations = []
+      for (let i = 0; i < 30; i++) {
+        locations.push({
+          id: i,
+          latlng: Vue2Leaflet.L.latLng(rand(58.0043), rand(56.2396)),
+          text: 'Контейнер №' + i
+        })
+      }
+      let icon = Vue2Leaflet.L.icon(Object.assign({},
+        Vue2Leaflet.L.Icon.Default.prototype.options,
+        {iconUrl, shadowUrl}
+      ))
+      return {
+        locations,
+        icon,
+        clusterOptions: {},
+        initialLocation: Vue2Leaflet.L.latLng(58.0043, 56.2396)
+      }
+    },
+    mounted() {
+      setTimeout(() => {
+        console.log('done')
+        this.$nextTick(() =>{
+          this.clusterOptions = { disableClusteringAtZoom: 20 }
+        });
+      }, 5000);
     }
   }
-}
 </script>
 
 <style>

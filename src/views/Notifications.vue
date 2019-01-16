@@ -75,6 +75,7 @@
                 sm12>
                 <!--<h2 class="title font-weight-light">Notifcation States</h2>-->
 
+                <!--
                 <material-notification
                   class="mb-3"
                   color="warning"
@@ -110,14 +111,26 @@
                   <strong>ЗАПОЛНЕННЫЙ КОНТЕЙНЕР: </strong> Процент заполненности контейнера №5 составляет 95%. <br />
                   <span>Дата: 09.01.2019. | Адрес: ул. Революции, 52</span>
                 </material-notification>
+                -->
 
+
+                <material-notification v-for="n in notifications"
+                  class="mb-3"
+                  :color="n.color"
+                  dismissible
+                >
+                  <strong>{{n.type}}: </strong> {{n.text}} <br />
+                  <span>Дата: {{n.date}} | Адрес: {{n.address}}</span>
+                </material-notification>
+
+                <!--
                 <material-notification
                   class="mb-3"
                   color="error"
                   dismissible
                 >
-                  <strong>ЗАПОЛНЕННЫЙ КОНТЕЙНЕР: </strong> Процент заполненности контейнера №1 составляет 90%. <br />
-                  <span>Дата: 09.01.2019. | Адрес: ул. Революции, 58А</span>
+                  <strong>ЗАПОЛНЕННЫЙ КОНТЕЙНЕР: </strong> Процент заполненности контейнера №29 составляет 90%. <br />
+                  <span>Дата: 09.01.2019. | Адрес: ул. Монастырская, 14</span>
                 </material-notification>
 
                 <material-notification
@@ -128,6 +141,8 @@
                   <strong>ПОВРЕЖДЕНИЕ ДАТЧИКА:</strong> Повреждён датчик контейнера №3 (сквер у строения "Дом чекистов"). <br />
                   <span>Дата: 08.01.2019. | Адрес: ул. Сибирская, 32</span>
                 </material-notification>
+                -->
+
               </v-flex>
             </v-layout>
 
@@ -254,38 +269,43 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    color: null,
-    colors: [
-      'purple',
-      'info',
-      'success',
-      'warning',
-      'error'
-    ],
-    top: true,
-    bottom: false,
-    left: false,
-    right: false,
-    snackbar: false
-  }),
+  import { mapState } from 'vuex';
 
-  methods: {
-    snack (...args) {
-      this.top = false
-      this.bottom = false
-      this.left = false
-      this.right = false
+  export default {
+    data: () => ({
+      color: null,
+      colors: [
+        'purple',
+        'info',
+        'success',
+        'warning',
+        'error'
+      ],
+      top: true,
+      bottom: false,
+      left: false,
+      right: false,
+      snackbar: false
+    }),
 
-      for (const loc of args) {
-        this[loc] = true
+    methods: {
+      snack (...args) {
+        this.top = false
+        this.bottom = false
+        this.left = false
+        this.right = false
+
+        for (const loc of args) {
+          this[loc] = true
+        }
+
+        this.color = this.colors[Math.floor(Math.random() * this.colors.length)]
+
+        this.snackbar = true
       }
-
-      this.color = this.colors[Math.floor(Math.random() * this.colors.length)]
-
-      this.snackbar = true
-    }
+    },
+    computed: mapState({
+      ...mapState(['notifications']),
+    }),
   }
-}
 </script>
