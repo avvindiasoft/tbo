@@ -82,8 +82,8 @@
           color="green"
           type="Line"
         >
-          <h3 class="title font-weight-light">Количество машин на линии</h3>
-          <p class="category d-inline-flex font-weight-light"></p>
+          <h3 class="title font-weight-light">Автомобили</h3>
+          <p class="category d-inline-flex font-weight-light">Количество автомобилей на линии</p>
 
           <template slot="actions">
             <v-icon
