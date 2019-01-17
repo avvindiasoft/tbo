@@ -92,7 +92,7 @@
             >
               mdi-clock-outline
             </v-icon>
-            <span class="caption grey--text font-weight-light">обновлено 15 минут назад</span>
+            <span class="caption grey--text font-weight-light">обновлено 17 минут назад</span>
           </template>
         </material-chart-card>
       </v-flex>
