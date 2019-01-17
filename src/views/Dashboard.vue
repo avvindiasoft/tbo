@@ -202,6 +202,7 @@
       let avg = (markers.map(data => data['percent'])
         .reduce((prev, curr) => prev + curr, 0) / markers.length)
         .toFixed(2)
+      let size = 10
       /*
       cars = cars.map((car) => {
         car.isDefected = (car.isDefected || car.isDefected === 'Целый') ? 'Поврежден' : 'Целый'
@@ -256,9 +257,9 @@
         },
         emailsSubscriptionChart: {
           data: {
-            labels: containers.map(data => "№" + data['number']),
+            labels: containers.slice(0, size).map(data => "№" + data['number']),
             series: [
-              containers.map(data => data['percent'])
+              containers.slice(0, size).map(data => data['percent'])
             ]
           },
           options: {

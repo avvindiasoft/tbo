@@ -13,33 +13,33 @@
   <div class="mapouter">
     <div class="gmap_canvas">
       <div id="app">
-  <v-map :zoom=12 :center="initialLocation">
-    <v-icondefault></v-icondefault>
-    <v-tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tilelayer>
-    <v-marker-cluster :options="clusterOptions" @clusterclick="click()">
-      <v-marker v-for="l in locations" :key="l.id" :lat-lng="l.latlng" :icon="icon">
-        <v-popup :content="l.text"></v-popup>
-      </v-marker>
-    </v-marker-cluster>
-  </v-map>
+        <v-map :zoom=12 :center="initialLocation">
+          <v-icondefault></v-icondefault>
+          <v-tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tilelayer>
+          <v-marker-cluster :options="clusterOptions" @clusterclick="click()">
+            <v-marker v-for="l in locations" :key="l.id" :lat-lng="l.latlng" :icon="icons[l.id % 4]">
+              <v-popup :content="l.text"></v-popup>
+            </v-marker>
+          </v-marker-cluster>
+        </v-map>
       </div>
     </div>
   </div>
 </template>
 
 <style>
-.mapouter {
-  text-align:right;
-  height:100%;
-  width:100%;
-  position: absolute;
-}
-.gmap_canvas {
-  overflow:hidden;
-  background:none!important;
-  height:100%;
-  width:100%;
-}
+  .mapouter {
+    text-align:right;
+    height:100%;
+    width:100%;
+    position: absolute;
+  }
+  .gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:100%;
+    width:100%;
+  }
 </style>
 
 <!--
@@ -144,11 +144,35 @@
   import iconUrl from 'leaflet/dist/images/marker-icon.png';
   import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
+  const iconMarkersUrl = {
+    red: 'http://localhost:8080/img/marker-icon-red.png',
+    green: 'http://localhost:8080/img/marker-icon-green.png',
+    blue: 'http://localhost:8080/img/marker-icon-blue.png',
+    yellow: 'http://localhost:8080/img/marker-icon-yellow.png'
+  }
+
   function rand(n) {
     let max = n + 0.1
     let min = n - 0.1
-    return Math.random() * (max - min) + min;
+    let result = Math.random() * (max - min) + min
+    return result
   }
+
+  function rand2(x, y) {
+    let max1 = x + 0.1
+    let min1 = x - 0.1
+    let max2 = y + 0.1
+    let min2 = y - 0.1
+    let resultX = Math.random() * (max1 - min1) + min1
+    let resultY = Math.random() * (max2 - min2) + min2
+    if (resultX < 58.00868 && resultY > 56.13620 && resultX > 57.94960 && resultY < 56.39400 ||
+      resultX < 58.07939 && resultY > 56.33888 && resultX > 57.94960 && resultY < 56.39400 ||
+      resultX < 58.05815 && resultY > 56.08163 && resultX > 58.03826 && resultY < 56.27152 ||
+      resultX < 58.02313 && resultY > 56.27104 && resultX > 57.94960 && resultY < 56.39400 )
+      return [resultX, resultY];
+    return rand2(x, y);
+  }
+
   export default {
     components: {
       'v-map': Vue2Leaflet.LMap,
@@ -166,19 +190,26 @@
     data () {
       let locations = []
       for (let i = 0; i < 30; i++) {
+        let coords = rand2(58.0043, 56.2396);
+        //console.log(coords);
         locations.push({
           id: i,
-          latlng: Vue2Leaflet.L.latLng(rand(58.0043), rand(56.2396)),
+          latlng: Vue2Leaflet.L.latLng(coords[0], coords[1]),
+          //latlng: Vue2Leaflet.L.latLng(rand(58.0043), rand(56.2396)),
           text: 'Контейнер №' + i
         })
       }
-      let icon = Vue2Leaflet.L.icon(Object.assign({},
-        Vue2Leaflet.L.Icon.Default.prototype.options,
-        {iconUrl, shadowUrl}
-      ))
+
+      let icons = [
+        L.icon(Object.assign({}, Vue2Leaflet.L.Icon.Default.prototype.options, {iconUrl: iconMarkersUrl.red, shadowUrl, iconSize:     [35, 35]})),
+        L.icon(Object.assign({}, Vue2Leaflet.L.Icon.Default.prototype.options, {iconUrl: iconMarkersUrl.blue, shadowUrl, iconSize:     [35, 35]})),
+        L.icon(Object.assign({}, Vue2Leaflet.L.Icon.Default.prototype.options, {iconUrl: iconMarkersUrl.green, shadowUrl, iconSize:     [35, 35]})),
+        L.icon(Object.assign({}, Vue2Leaflet.L.Icon.Default.prototype.options, {iconUrl: iconMarkersUrl.yellow, shadowUrl, iconSize:     [35, 35]}))
+      ]
+
       return {
         locations,
-        icon,
+        icons,
         clusterOptions: {},
         initialLocation: Vue2Leaflet.L.latLng(58.0043, 56.2396)
       }
