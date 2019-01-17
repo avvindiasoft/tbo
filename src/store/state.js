@@ -168,7 +168,7 @@ export default {
       coords: [57.88987, 56.33919],
       icon: 'green',
       title: 'Контейнер №21',
-      percent: 214,
+      percent: 95,
       img: '07.jpg'
     },
     {
