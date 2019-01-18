@@ -107,15 +107,93 @@
   export default {
     components: { yandexMap, ymapMarker },
     data() {
+      let icons = {
+        green: {
+          iconLayout: 'default#image',
+          iconImageSize: [30, 30],
+          iconImageHref: 'http://localhost:8080/img/marker-trash-icon-green.png'
+        },
+        red: {
+          iconLayout: 'default#image',
+          iconImageSize: [30, 30],
+          iconImageHref: 'http://localhost:8080/img/marker-trash-icon-red.png'
+        },
+        blue:  {
+          iconLayout: 'default#image',
+          iconImageSize: [30, 30],
+          iconImageHref: 'http://localhost:8080/img/marker-trash-icon-blue.png'
+        }
+      }
       return {
         placemarks: [
           {
-            coords: [57.99390, 56.20500],
-            color: "red",
+            coords: [57.980860, 56.218950],
             properties: {}, // define properties here
-            options: {}, // define options here
+            options: icons.green, // define options here
             clusterName: "1",
-            icon: {color: 'green', glyph: 'trash'},
+            callbacks: { click: function() {} },
+          },
+          {
+            coords: [57.983273, 56.219478],
+            properties: {}, // define properties here
+            options: icons.red, // define options here
+            clusterName: "1",
+            callbacks: { click: function() {} }
+          },
+          {
+            coords: [57.984047, 56.213418],
+            properties: {}, // define properties here
+            options: icons.red, // define options here
+            clusterName: "1",
+            callbacks: { click: function() {} }
+          },
+          {
+            coords: [57.986103, 56.213866],
+            properties: {}, // define properties here
+            options: icons.blue, // define options here
+            clusterName: "1",
+            callbacks: { click: function() {} }
+          },
+          {
+            coords: [57.986055, 56.217312],
+            properties: {}, // define properties here
+            options: icons.red, // define options here
+            clusterName: "1",
+            callbacks: { click: function() {} }
+          },
+          {
+            coords: [57.980383, 56.216053],
+            properties: {}, // define properties here
+            options: icons.red, // define options here
+            clusterName: "1",
+            callbacks: { click: function() {} }
+          },
+          {
+            coords: [57.978426, 56.215392],
+            properties: {}, // define properties here
+            options: icons.red, // define options here
+            clusterName: "1",
+            callbacks: { click: function() {} }
+          },
+          {
+            coords: [57.976974, 56.210405],
+            properties: {}, // define properties here
+            options: icons.red, // define options here
+            clusterName: "1",
+            callbacks: { click: function() {} }
+          },
+          {
+            coords: [57.975487, 56.211732],
+            properties: {}, // define properties here
+            options: icons.blue, // define options here
+            clusterName: "1",
+            callbacks: { click: function() {} }
+          },
+          {
+            coords: [57.977269, 56.215230],
+            properties: {}, // define properties here
+            options: icons.green, // define options here
+            clusterName: "1",
             callbacks: { click: function() {} }
           }
         ]
