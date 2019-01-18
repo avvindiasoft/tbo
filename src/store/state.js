@@ -5,7 +5,7 @@ export default {
   markers: [
     {
       number: 1,
-      coords: [58.00218, 56.23720],
+      coords: [57.980860, 56.218950],
       icon: 'red',
       title: 'Контейнер №1',
       percent: 30,
@@ -13,7 +13,7 @@ export default {
     },
     {
       number: 2,
-      coords: [58.00623, 56.23378],
+      coords: [57.983273, 56.219478],
       icon: 'green',
       title: 'Контейнер №2',
       percent: 35,
@@ -21,7 +21,7 @@ export default {
     },
     {
       number: 3,
-      coords: [58.00613, 56.25389],
+      coords: [57.984047, 56.213418],
       icon: 'black',
       title: 'Контейнер №3',
       percent: 30,
@@ -29,7 +29,7 @@ export default {
     },
     {
       number: 4,
-      coords: [58.00623, 56.24378],
+      coords: [57.986103, 56.213866],
       icon: 'green',
       title: 'Контейнер №4',
       percent: 45,
@@ -37,7 +37,7 @@ export default {
     },
     {
       number: 5,
-      coords: [58.00200, 56.24348],
+      coords: [57.986055, 56.217312],
       icon: 'red',
       title: 'Контейнер №5',
       percent: 95,
@@ -45,7 +45,7 @@ export default {
     },
     {
       number: 6,
-      coords: [58.00723, 56.23898],
+      coords: [57.980383, 56.216053],
       icon: 'blue',
       title: 'Контейнер №6',
       percent: 59,
@@ -53,7 +53,7 @@ export default {
     },
     {
       number: 7,
-      coords: [58.00203, 56.23000],
+      coords: [57.978426, 56.215392],
       icon: 'green',
       title: 'Контейнер №7',
       percent: 10,
@@ -61,7 +61,7 @@ export default {
     },
     {
       number: 8,
-      coords: [58.00503, 56.24000],
+      coords: [57.976974, 56.210405],
       icon: 'green',
       title: 'Контейнер №8',
       percent: 80,
@@ -69,7 +69,7 @@ export default {
     },
     {
       number: 9,
-      coords: [58.00203, 56.23000],
+      coords: [57.975487, 56.211732],
       icon: 'green',
       title: 'Контейнер №9',
       percent: 30,
@@ -77,7 +77,7 @@ export default {
     },
     {
       number: 10,
-      coords: [58.00203, 56.23000],
+      coords: [57.977269, 56.215230],
       icon: 'green',
       title: 'Контейнер №10',
       percent: 25,
