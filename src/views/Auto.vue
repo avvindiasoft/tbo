@@ -236,7 +236,10 @@
             setTimeout(() => {
               this.info = 'Автомобиль №'+ auto +' успешно разгрузил контейнер №'+ num;
               this.snackbar = true;
-              this.iconMarkers[num] = this. icons[2];
+              if(num !== 25){
+                this.iconMarkers[num] = this.icons[2];
+              }
+
               if(num === 29){
                 this.autoFunction1(1, 27, 'ул. Петропавловская, 70', this.move13);
               }
@@ -293,7 +296,7 @@
             setTimeout(() => {
               this.info = (num === 21) ? 'Автомобиль №'+ auto +' успешно разгрузился на свалке' : 'Автомобиль №'+ auto +' успешно разгрузил контейнер №'+ num;
               this.snackbar = true;
-              this.iconMarkers[num] = this. icons[2];
+              this.iconMarkers[num] = this.icons[2];
 
               if(num === 24){
                 this.autoFunction2(2, 23, 'ул. Г.Успенского, 15', this.move23);
