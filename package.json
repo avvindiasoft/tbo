@@ -19,6 +19,8 @@
     "vue": "^2.5.17",
     "vue-chartist": "^2.1.2",
     "vue-meta": "^1.5.2",
+    "vue-yandex-maps": "^0.8.2",
+    "vue-yandex-maps-ex": "^0.7.9",
     "vue2-leaflet": "^1.2.3",
     "vue2-leaflet-markercluster": "^2.1.2",
     "vuetify": "^1.2.5"
