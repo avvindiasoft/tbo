@@ -1,23 +1,23 @@
 <template>
   <div class="mapouter">
     <v-snackbar
-      :color="success"
-      :bottom="bottom"
-      :top="top"
-      :left="left"
-      :right="right"
-      v-model="snackbar"
+            :color="success"
+            :bottom="bottom"
+            :top="top"
+            :left="left"
+            :right="right"
+            v-model="snackbar"
     >
       <v-icon
-        color="white"
-        class="mr-3"
+              color="white"
+              class="mr-3"
       >
         mdi-bell-plus
       </v-icon>
       <div>{{info}}</div>
       <v-icon
-        size="16"
-        @click="snackbar = false"
+              size="16"
+              @click="snackbar = false"
       >
         mdi-close-circle
       </v-icon>
@@ -40,14 +40,14 @@
 
           <v-marker :key="auto1" :lat-lng="auto11" :icon="iconAuto">
           </v-marker>
-          <v-marker :key="auto2" :lat-lng="auto21" :icon="iconAuto">
-          </v-marker>
-          <v-marker :key="auto3" :lat-lng="auto31" :icon="iconAuto">
-          </v-marker>
-          <v-marker :key="auto4" :lat-lng="auto41" :icon="iconAuto">
-          </v-marker>
-          <v-marker :key="auto5" :lat-lng="auto51" :icon="iconAuto">
-          </v-marker>
+          <!--<v-marker :key="auto2" :lat-lng="auto21" :icon="iconAuto">-->
+          <!--</v-marker>-->
+          <!--<v-marker :key="auto3" :lat-lng="auto31" :icon="iconAuto">-->
+          <!--</v-marker>-->
+          <!--<v-marker :key="auto4" :lat-lng="auto41" :icon="iconAuto">-->
+          <!--</v-marker>-->
+          <!--<v-marker :key="auto5" :lat-lng="auto51" :icon="iconAuto">-->
+          <!--</v-marker>-->
         </v-map>
       </div>
     </div>
@@ -100,6 +100,8 @@
   import iconUrl from 'leaflet/dist/images/marker-icon.png';
   import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
 
+  import store from '@/store'
+
   import { mapState } from 'vuex';
 
   const iconAutoUrl = 'http://localhost:8080/img/kamaz.png';
@@ -124,9 +126,9 @@
     let resultX = Math.random() * (max1 - min1) + min1
     let resultY = Math.random() * (max2 - min2) + min2
     if (resultX < 58.00868 && resultY > 56.13620 && resultX > 57.94960 && resultY < 56.39400 ||
-      resultX < 58.07939 && resultY > 56.33888 && resultX > 57.94960 && resultY < 56.39400 ||
-      resultX < 58.05815 && resultY > 56.08163 && resultX > 58.03826 && resultY < 56.27152 ||
-      resultX < 58.02313 && resultY > 56.27104 && resultX > 57.94960 && resultY < 56.39400 )
+            resultX < 58.07939 && resultY > 56.33888 && resultX > 57.94960 && resultY < 56.39400 ||
+            resultX < 58.05815 && resultY > 56.08163 && resultX > 58.03826 && resultY < 56.27152 ||
+            resultX < 58.02313 && resultY > 56.27104 && resultX > 57.94960 && resultY < 56.39400 )
       return [resultX, resultY];
     return rand2(x, y);
   }
@@ -146,10 +148,13 @@
         //alert("clusterclick")
       },
       moveAutoPlus: function(a, b){
-        return (a <= b) ? a + 0.0009 : a;
+        return (a <= b) ? a + 0.00035 : a;
       },
       moveAutoMinus: function(a, b){
-        return (a >= b) ? a - 0.0009 : a;
+        return (a >= b) ? a - 0.00035 : a;
+      },
+      move: function(from, to){
+        return [this.moveAutoPlus(from[0], to[0]), this.moveAutoMinus(from[1], to[1])]
       },
       move12: function(){
         return [this.moveAutoPlus(this.auto11[0], this.auto12[0]), this.moveAutoMinus(this.auto11[1], this.auto12[1])]
@@ -200,26 +205,14 @@
         });
       },
       autoFunction1: function(auto, num, addr, func){
+        console.log(func[0], '->', this.locations[num].latlng.lat);
+        console.log(func[1], '->', this.locations[num].latlng.lng);
         const interval = () => {
           this.auto11 = func();
-
           let b, d;
-          if(num === 29){
-            b = this.auto12[0];
-            d = this.auto12[1];
-          }
-          if(num === 27){
-            b = this.auto13[0];
-            d = this.auto13[1];
-          }
-          if(num === 26){
-            b = this.auto14[0];
-            d = this.auto14[1];
-          }
-          if(num === 25){
-            b = this.auto15[0];
-            d = this.auto15[1];
-          }
+
+          b = this.locations[num].latlng.lat;
+          d = this.locations[num].latlng.lng;
 
           if(this.auto11[0] >= b && this.auto11[1] <= d){
             clearInterval(intervalId);
@@ -236,23 +229,30 @@
             setTimeout(() => {
               this.info = 'Автомобиль №'+ auto +' успешно разгрузил контейнер №'+ num;
               this.snackbar = true;
-              if(num !== 25){
-                this.iconMarkers[num] = this.icons[2];
-              }
 
-              if(num === 29){
-                this.autoFunction1(1, 27, 'ул. Петропавловская, 70', this.move13);
-              }
-              if(num === 27){
-                this.autoFunction1(1, 26, 'ул. Окулова, 123', this.move14);
-              }
-              if(num === 26){
-                this.autoFunction1(1, 25, 'ул. Дзержинского, 43', this.move15);
-              }
-              if(num === 25){
-                this.crashFunction(1, 25, 'ул. Дзержинского, 43');
-              }
-            }, 7000);
+              // num = num % 29 + 1;
+
+              let from = [this.locations[num - 1].latlng.lat, this.locations[num - 1].latlng.lng];
+              let to = [this.locations[num].latlng.lat, this.locations[num].latlng.lng];
+
+              console.log("It's alive!");
+
+              this.autoFunction1(1, num, 'Addr ' + num, this.move(this.auto11, to));
+
+              // this.autoFunction1(1, num % 29 + 1, 'Addr ' + (num % 29 + 1), this.move12);
+              // if(num === 3){
+              //   this.autoFunction1(1, 4, 'ул. Петропавловская, 70', this.move12);
+              // }
+              // if(num === 4){
+              //   this.autoFunction1(1, 5, 'ул. Окулова, 123', this.move14);
+              // }
+              // if(num === 26){
+              //   this.autoFunction1(1, 25, 'ул. Дзержинского, 43', this.move15);
+              // }
+              // if(num === 25){
+              //   this.crashFunction(1, 25, 'ул. Дзержинского, 43');
+              // }
+            }, 4000);
 
           }
         }
@@ -348,8 +348,8 @@
     }),
     data () {
       let icon = Vue2Leaflet.L.icon(Object.assign({},
-        Vue2Leaflet.L.Icon.Default.prototype.options,
-        {iconUrl, shadowUrl}
+              Vue2Leaflet.L.Icon.Default.prototype.options,
+              {iconUrl, shadowUrl}
       ))
 
       let iconAuto = L.icon({
@@ -365,44 +365,46 @@
 
       let locations = [];
       let iconMarkers = [];
-      for (let i = 0; i < 19; i++) {
-        let coords = rand2(58.0043, 56.2396);
+      let markers = store.state.markers;
+
+      markers.forEach(function(marker) {
+        let coords = marker.coords;
         locations.push({
-          id: i,
-          //latlng: Vue2Leaflet.L.latLng(rand(58.0043), rand(56.2396)),
+          id: marker.number,
           latlng: Vue2Leaflet.L.latLng(coords[0], coords[1]),
-          text: 'Контейнер №' + i
+          text: 'Контейнер №' + marker.number
         })
-        iconMarkers.push(icons[1]);
-      }
+        iconMarkers.push(icons[marker.number % 3]);
+      })
 
 
 
 //27: [58.00997, 56.20199],
       //test
 
-      const obj = {
-        19: [57.99390, 56.20499],
-        20: [57.99090, 56.20499],
-        21: [57.88987, 56.33919],
-        22: [57.99087, 56.24919],
-        23: [57.99887, 56.24099],
-        24: [58.00087, 56.20999],
-        25: [58.00799, 56.16901],
-        26: [58.00697, 56.19401],
-        27: [58.00687, 56.20499],
-        28: [58.00439, 56.23969],
-        29: [58.00687, 56.21499],
-      };
-
-      for(let i in obj){
-        locations.push({
-          id: i,
-          latlng: Vue2Leaflet.L.latLng(obj[i][0], obj[i][1]),
-          text: 'Контейнер №' + i
-        })
-        iconMarkers.push(icons[0]);
-      }
+      // const obj = {
+      //   19: [57.99390, 56.20499],
+      //   20: [57.99090, 56.20499],
+      //   21: [57.88987, 56.33919],
+      //   22: [57.99087, 56.24919],
+      //   23: [57.99887, 56.24099],
+      //   24: [58.00087, 56.20999],
+      //   25: [58.00799, 56.16901],
+      //   26: [58.00697, 56.19401],
+      //   27: [58.00687, 56.20499],
+      //   28: [58.00439, 56.23969],
+      //   // 29: [58.00687, 56.21499],
+      // };
+      //
+      //
+      // for(let i in obj){
+      //   locations.push({
+      //     id: i,
+      //     latlng: Vue2Leaflet.L.latLng(obj[i][0], obj[i][1]),
+      //     text: 'Контейнер №' + i
+      //   })
+      //   iconMarkers.push(icons[0]);
+      // }
 
       return {
         locations,
@@ -412,34 +414,42 @@
         icons,
         clusterOptions: {},
         initialLocation: Vue2Leaflet.L.latLng(58.0043, 56.2396),
-        auto11: [locations[28].latlng.lat, locations[28].latlng.lng],
-        auto12: [locations[29].latlng.lat, locations[29].latlng.lng],
-        auto13: [locations[27].latlng.lat, locations[27].latlng.lng],
-        auto14: [locations[26].latlng.lat, locations[26].latlng.lng],
-        auto15: [locations[25].latlng.lat, locations[25].latlng.lng],
-        auto21: [locations[27].latlng.lat, locations[27].latlng.lng],
-        auto22: [locations[24].latlng.lat, locations[24].latlng.lng],
-        auto23: [locations[23].latlng.lat, locations[23].latlng.lng],
-        auto24: [locations[22].latlng.lat, locations[22].latlng.lng],
-        auto25: [locations[21].latlng.lat, locations[21].latlng.lng],
-        auto31: [58.00001, 56.20699],
-        auto32: [locations[20].latlng.lat, locations[20].latlng.lng],
-        auto41: [58.00001, 56.24999],
-        auto51: [58.01611, 56.23009],
+        auto11: [locations[0].latlng.lat, locations[0].latlng.lng],
+        auto12: [locations[1].latlng.lat, locations[1].latlng.lng],
+        auto13: [locations[2].latlng.lat, locations[2].latlng.lng],
+        auto14: [locations[3].latlng.lat, locations[3].latlng.lng],
+        auto15: [locations[4].latlng.lat, locations[4].latlng.lng],
+        // auto21: [locations[5].latlng.lat, locations[5].latlng.lng],
+        // auto22: [locations[6].latlng.lat, locations[6].latlng.lng],
+        // auto23: [locations[7].latlng.lat, locations[7].latlng.lng],
+        // auto24: [locations[8].latlng.lat, locations[8].latlng.lng],
+        // auto25: [locations[9].latlng.lat, locations[9].latlng.lng],
+        // auto31: [58.00001, 56.20699],
+        // auto32: [locations[20].latlng.lat, locations[20].latlng.lng],
+        // auto41: [58.00001, 56.24999],
+        // auto51: [58.01611, 56.23009],
         snackbar: false,
         info: null
       }
     },
 
     mounted() {
-      const a = this.auto11[0];
-      const b = this.auto12[0];
-      const c = this.auto11[1];
-      const d = this.auto12[1];
+      // const a = this.auto11[0];
+      // const b = this.auto12[0];
+      // const c = this.auto11[1];
+      // const d = this.auto12[1];
 
-      this.autoFunction1(1, 29, 'ул. Ленина, 80', this.move12);
-      this.autoFunction2(2, 24, 'ул. Грузинская, 2', this.move22);
-      this.autoFunction3();
+      let index = 0;
+
+      let from = [this.locations[index].latlng.lat, this.locations[index].latlng.lng];
+      let to = [this.locations[index + 1].latlng.lat, this.locations[index + 1].latlng.lng];
+
+      this.autoFunction1(1, 2, 'Addr ' + this.locations[index].id, this.move(from, to));
+
+
+      // this.autoFunction1(1, 3, 'ул. Ленина, 80', this.move12);
+      // this.autoFunction2(2, 24, 'ул. Грузинская, 2', this.move22);
+      // this.autoFunction3();
 
       setTimeout(() => {
         this.info = 'Возгорание контейнера №19! Адрес: ул. Кронштадтская, 88.';
