@@ -93,8 +93,8 @@
   }
 </style>
 
-
 <script>
+/* eslint-disable */
   import * as Vue2Leaflet from 'vue2-leaflet';
   import Vue2LeafletMarkercluster from 'vue2-leaflet-markercluster';
   import iconUrl from 'leaflet/dist/images/marker-icon.png';
@@ -153,6 +153,14 @@
       moveAutoMinus: function(a, b){
         return (a >= b) ? a - 0.00035 : a;
       },
+
+      moveAuto: function(from, to) {
+        let deltaLat = (to[0] - from[0]) / 100;
+        let deltaLng = (to[1] - from[1]) / 100;
+
+        return [from[0] + deltaLat, from[1] + deltaLng];
+      },
+
       move: function(from, to){
         return [this.moveAutoPlus(from[0], to[0]), this.moveAutoMinus(from[1], to[1])]
       },
@@ -204,18 +212,29 @@
           color: 'success'
         });
       },
-      autoFunction1: function(auto, num, addr, func){
-        console.log(func[0], '->', this.locations[num].latlng.lat);
-        console.log(func[1], '->', this.locations[num].latlng.lng);
+      // autoFunction1: function(auto, num, addr, func){
+      autoFunction1: function(auto, num, addr){
         const interval = () => {
-          this.auto11 = func();
-          let b, d;
 
-          b = this.locations[num].latlng.lat;
-          d = this.locations[num].latlng.lng;
+          let from = [this.locations[num].latlng.lat, this.locations[num].latlng.lng];
+          let to = [this.locations[num + 1].latlng.lat, this.locations[num + 1].latlng.lng]
+
+          let output = "from: " + from + "\nto: " + to;
+          // alert(output);
+
+          let deltaLat = (to[0] - from[0]) / 10.0;
+          let deltaLng = (to[1] - from[1]) / 10.0;
+
+          // alert(num);
+
+          this.auto11 = [this.auto11[0] + deltaLat, this.auto11[1] + deltaLng];
+
+          let b = this.locations[num + 1].latlng.lat;
+          let d = this.locations[num + 1].latlng.lng;
 
           if(this.auto11[0] >= b && this.auto11[1] <= d){
             clearInterval(intervalId);
+            return;
             this.info = 'Автомобиль №'+ auto +' успешно достиг контейнера №'+ num;
             this.snackbar = true;
             this.$store.commit('addNotification', {
@@ -229,34 +248,32 @@
             setTimeout(() => {
               this.info = 'Автомобиль №'+ auto +' успешно разгрузил контейнер №'+ num;
               this.snackbar = true;
+              if(num !== 25) {
+                this.iconMarkers[num] = this.icons[2];
+              }
 
-              // num = num % 29 + 1;
+              num = num % this.locations.length + 1;
 
-              let from = [this.locations[num - 1].latlng.lat, this.locations[num - 1].latlng.lng];
-              let to = [this.locations[num].latlng.lat, this.locations[num].latlng.lng];
 
-              console.log("It's alive!");
+              // alert('Inside');
 
-              this.autoFunction1(1, num, 'Addr ' + num, this.move(this.auto11, to));
-
-              // this.autoFunction1(1, num % 29 + 1, 'Addr ' + (num % 29 + 1), this.move12);
-              // if(num === 3){
-              //   this.autoFunction1(1, 4, 'ул. Петропавловская, 70', this.move12);
-              // }
-              // if(num === 4){
-              //   this.autoFunction1(1, 5, 'ул. Окулова, 123', this.move14);
-              // }
-              // if(num === 26){
-              //   this.autoFunction1(1, 25, 'ул. Дзержинского, 43', this.move15);
-              // }
-              // if(num === 25){
-              //   this.crashFunction(1, 25, 'ул. Дзержинского, 43');
-              // }
-            }, 4000);
-
+              // this.autoFunction1(auto, this.locations[num + 1].number, 'Addr ' + num);
+                // if(num === 29){
+                //   this.autoFunction1(1, 27, 'ул. Петропавловская, 70', this.move13);
+                // }
+                // if(num === 27){
+                //   this.autoFunction1(1, 26, 'ул. Окулова, 123', this.move14);
+                // }
+                // if(num === 26){
+                //   this.autoFunction1(1, 25, 'ул. Дзержинского, 43', this.move15);
+                // }
+                // if(num === 25){
+                //   this.crashFunction(1, 25, 'ул. Дзержинского, 43');
+                // }
+            }, 700);
           }
         }
-        const intervalId = setInterval(interval, 1000);
+        let intervalId = setInterval(interval, 700);
       },
       autoFunction2: function(auto, num, addr, func){
         const interval = () => {
@@ -367,6 +384,7 @@
       let iconMarkers = [];
       let markers = store.state.markers;
 
+
       markers.forEach(function(marker) {
         let coords = marker.coords;
         locations.push({
@@ -376,35 +394,6 @@
         })
         iconMarkers.push(icons[marker.number % 3]);
       })
-
-
-
-//27: [58.00997, 56.20199],
-      //test
-
-      // const obj = {
-      //   19: [57.99390, 56.20499],
-      //   20: [57.99090, 56.20499],
-      //   21: [57.88987, 56.33919],
-      //   22: [57.99087, 56.24919],
-      //   23: [57.99887, 56.24099],
-      //   24: [58.00087, 56.20999],
-      //   25: [58.00799, 56.16901],
-      //   26: [58.00697, 56.19401],
-      //   27: [58.00687, 56.20499],
-      //   28: [58.00439, 56.23969],
-      //   // 29: [58.00687, 56.21499],
-      // };
-      //
-      //
-      // for(let i in obj){
-      //   locations.push({
-      //     id: i,
-      //     latlng: Vue2Leaflet.L.latLng(obj[i][0], obj[i][1]),
-      //     text: 'Контейнер №' + i
-      //   })
-      //   iconMarkers.push(icons[0]);
-      // }
 
       return {
         locations,
@@ -434,20 +423,17 @@
     },
 
     mounted() {
-      // const a = this.auto11[0];
-      // const b = this.auto12[0];
-      // const c = this.auto11[1];
-      // const d = this.auto12[1];
+      const a = this.auto11[0];
+      const b = this.auto12[0];
+      const c = this.auto11[1];
+      const d = this.auto12[1];
 
-      let index = 0;
+      for (let index = 1; index < this.locations.length - 1; index++) {
+        this.autoFunction1(1, index + 1, 'Addr ' + (index + 1));
+      }
 
-      let from = [this.locations[index].latlng.lat, this.locations[index].latlng.lng];
-      let to = [this.locations[index + 1].latlng.lat, this.locations[index + 1].latlng.lng];
-
-      this.autoFunction1(1, 2, 'Addr ' + this.locations[index].id, this.move(from, to));
-
-
-      // this.autoFunction1(1, 3, 'ул. Ленина, 80', this.move12);
+      // this.autoFunction1(1, 1, 'ул. Ленина, 80');
+      // this.autoFunction1(1, 29, 'ул. Ленина, 80', this.move12);
       // this.autoFunction2(2, 24, 'ул. Грузинская, 2', this.move22);
       // this.autoFunction3();
 
