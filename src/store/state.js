@@ -1,241 +1,10 @@
 // https://vuex.vuejs.org/en/state.html
 // https://vuex.vuejs.org/en/state.html
 
+import markers from './markers.js';
+
 export default {
-  markers: [
-    {
-      number: 1,
-      coords: [57.994114, 56.247811],
-      icon: 'red',
-      title: 'Контейнер №1',
-      percent: 30,
-      img: '01.jpg'
-    },
-    {
-      number: 2,
-      coords: [57.996178, 56.245388],
-      icon: 'green',
-      title: 'Контейнер №2',
-      percent: 35,
-      img: '02.jpg'
-    },
-    {
-      number: 3,
-      coords: [57.997042, 56.248104],
-      icon: 'black',
-      title: 'Контейнер №3',
-      percent: 30,
-      img: '03.jpg'
-    },
-    {
-      number: 4,
-      coords: [57.999025, 56.246144],
-      icon: 'green',
-      title: 'Контейнер №4',
-      percent: 45,
-      img: '04.jpg'
-    },
-    {
-      number: 5,
-      coords: [58.001213, 56.253803],
-      icon: 'red',
-      title: 'Контейнер №5',
-      percent: 95,
-      img: '05.jpg'
-    },
-    {
-      number: 6,
-      coords: [58.003809, 56.251612],
-      icon: 'blue',
-      title: 'Контейнер №6',
-      percent: 59,
-      img: '06.jpg'
-    },
-    {
-      number: 7,
-      coords: [58.002381, 56.246968],
-      icon: 'green',
-      title: 'Контейнер №7',
-      percent: 10,
-      img: '07.jpg'
-    },
-    {
-      number: 8,
-      coords: [58.003486, 56.238248],
-      icon: 'green',
-      title: 'Контейнер №8',
-      percent: 80,
-      img: '07.jpg'
-    },
-    {
-      number: 9,
-      coords: [58.006379, 56.236705],
-      icon: 'green',
-      title: 'Контейнер №9',
-      percent: 30,
-      img: '07.jpg'
-    },
-    {
-      number: 10,
-      coords: [58.005381, 56.229609],
-      icon: 'green',
-      title: 'Контейнер №10',
-      percent: 25,
-      img: '07.jpg'
-    },
-    {
-      number: 11,
-      coords: [58.007944, 56.227953],
-      icon: 'green',
-      title: 'Контейнер №11',
-      percent: 28,
-      img: '07.jpg'
-    },
-    {
-      number: 12,
-      coords: [58.009124, 56.234932],
-      icon: 'green',
-      title: 'Контейнер №12',
-      percent: 23,
-      img: '07.jpg'
-    },
-    {
-      number: 13,
-      coords: [58.008048, 56.235696],
-      icon: 'green',
-      title: 'Контейнер №13',
-      percent: 34,
-      img: '07.jpg'
-    },
-    {
-      number: 14,
-      coords: [58.010557, 56.245096],
-      icon: 'green',
-      title: 'Контейнер №14',
-      percent: 48,
-      img: '07.jpg'
-    },
-    {
-      number: 15,
-      coords: [58.012511, 56.243242],
-      icon: 'green',
-      title: 'Контейнер №15',
-      percent: 27,
-      img: '07.jpg'
-    },
-    {
-      number: 16,
-      coords: [58.015422, 56.240622],
-      icon: 'green',
-      title: 'Контейнер №16',
-      percent: 12,
-      img: '07.jpg'
-    },
-    {
-      number: 17,
-      coords: [58.00203, 56.23000],
-      icon: 'green',
-      title: 'Контейнер №17',
-      percent: 32,
-      img: '07.jpg'
-    },
-    {
-      number: 18,
-      coords: [58.012319, 56.225545],
-      icon: 'green',
-      title: 'Контейнер №18',
-      percent: 20,
-      img: '07.jpg'
-    },
-    {
-      number: 19,
-      coords: [58.005405, 56.229636],
-      icon: 'green',
-      title: 'Контейнер №19',
-      percent: 28,
-      img: '07.jpg'
-    },
-    {
-      number: 20,
-      coords: [58.002670, 56.230806],
-      icon: 'green',
-      title: 'Контейнер №20',
-      percent: 28,
-      img: '07.jpg'
-    },
-    {
-      number: 21,
-      coords: [58.000014, 56.227085],
-      icon: 'green',
-      title: 'Контейнер №21',
-      percent: 95,
-      img: '07.jpg'
-    },
-    {
-      number: 22,
-      coords: [57.997697, 56.224595],
-      icon: 'green',
-      title: 'Контейнер №22',
-      percent: 16,
-      img: '07.jpg'
-    },
-    {
-      number: 23,
-      coords: [57.996245, 56.226370],
-      icon: 'green',
-      title: 'Контейнер №23',
-      percent: 7,
-      img: '07.jpg'
-    },
-    {
-      number: 24,
-      coords: [57.994864, 56.221576],
-      icon: 'green',
-      title: 'Контейнер №24',
-      percent: 19,
-      img: '07.jpg'
-    },
-    {
-      number: 25,
-      coords: [57.990080, 56.218085],
-      icon: 'green',
-      title: 'Контейнер №25',
-      percent: 2,
-      img: '07.jpg'
-    },
-    {
-      number: 26,
-      coords: [57.986467, 56.217542],
-      icon: 'green',
-      title: 'Контейнер №26',
-      percent: 50,
-      img: '07.jpg'
-    },
-    {
-      number: 27,
-      coords: [57.982166, 56.216519],
-      icon: 'green',
-      title: 'Контейнер №27',
-      percent: 41,
-      img: '07.jpg'
-    },
-    {
-      number: 28,
-      coords: [57.982585, 56.213290],
-      icon: 'green',
-      title: 'Контейнер №28',
-      percent: 35,
-      img: '07.jpg'
-    },
-    {
-      number: 29,
-      coords: [57.980458, 56.206820],
-      icon: 'green',
-      title: 'Контейнер №29',
-      percent: 18,
-      img: '07.jpg'
-    }
-  ],
+  markers,
   cars: [
     {
       id: 1,
@@ -349,3 +118,241 @@ export default {
 }
 
 
+
+
+/*
+  markers: [
+    {
+      number: 1,
+      coords: [57.980860, 56.218950],
+      icon: 'red',
+      title: 'Контейнер №1',
+      percent: 30,
+      img: '01.jpg'
+    },
+    {
+      number: 2,
+      coords: [57.983273, 56.219478],
+      icon: 'green',
+      title: 'Контейнер №2',
+      percent: 35,
+      img: '02.jpg'
+    },
+    {
+      number: 3,
+      coords: [57.984047, 56.213418],
+      icon: 'black',
+      title: 'Контейнер №3',
+      percent: 30,
+      img: '03.jpg'
+    },
+    {
+      number: 4,
+      coords: [57.986103, 56.213866],
+      icon: 'green',
+      title: 'Контейнер №4',
+      percent: 45,
+      img: '04.jpg'
+    },
+    {
+      number: 5,
+      coords: [57.986055, 56.217312],
+      icon: 'red',
+      title: 'Контейнер №5',
+      percent: 95,
+      img: '05.jpg'
+    },
+    {
+      number: 6,
+      coords: [57.980383, 56.216053],
+      icon: 'blue',
+      title: 'Контейнер №6',
+      percent: 59,
+      img: '06.jpg'
+    },
+    {
+      number: 7,
+      coords: [57.978426, 56.215392],
+      icon: 'green',
+      title: 'Контейнер №7',
+      percent: 10,
+      img: '07.jpg'
+    },
+    {
+      number: 8,
+      coords: [57.976974, 56.210405],
+      icon: 'green',
+      title: 'Контейнер №8',
+      percent: 80,
+      img: '07.jpg'
+    },
+    {
+      number: 9,
+      coords: [57.975487, 56.211732],
+      icon: 'green',
+      title: 'Контейнер №9',
+      percent: 30,
+      img: '07.jpg'
+    },
+    {
+      number: 10,
+      coords: [57.977269, 56.215230],
+      icon: 'green',
+      title: 'Контейнер №10',
+      percent: 25,
+      img: '07.jpg'
+    },
+    {
+      number: 11,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №11',
+      percent: 28,
+      img: '07.jpg'
+    },
+    {
+      number: 12,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №12',
+      percent: 23,
+      img: '07.jpg'
+    },
+    {
+      number: 13,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №13',
+      percent: 34,
+      img: '07.jpg'
+    },
+    {
+      number: 14,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №14',
+      percent: 48,
+      img: '07.jpg'
+    },
+    {
+      number: 15,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №15',
+      percent: 27,
+      img: '07.jpg'
+    },
+    {
+      number: 16,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №16',
+      percent: 12,
+      img: '07.jpg'
+    },
+    {
+      number: 17,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №17',
+      percent: 32,
+      img: '07.jpg'
+    },
+    {
+      number: 18,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №18',
+      percent: 20,
+      img: '07.jpg'
+    },
+    {
+      number: 19,
+      coords: [57.99390, 56.20499],
+      icon: 'green',
+      title: 'Контейнер №19',
+      percent: 28,
+      img: '07.jpg'
+    },
+    {
+      number: 20,
+      coords: [57.99090, 56.20499],
+      icon: 'green',
+      title: 'Контейнер №20',
+      percent: 28,
+      img: '07.jpg'
+    },
+    {
+      number: 21,
+      coords: [57.88987, 56.33919],
+      icon: 'green',
+      title: 'Контейнер №21',
+      percent: 95,
+      img: '07.jpg'
+    },
+    {
+      number: 22,
+      coords: [57.99087, 56.24919],
+      icon: 'green',
+      title: 'Контейнер №22',
+      percent: 16,
+      img: '07.jpg'
+    },
+    {
+      number: 23,
+      coords: [57.99887, 56.24099],
+      icon: 'green',
+      title: 'Контейнер №23',
+      percent: 7,
+      img: '07.jpg'
+    },
+    {
+      number: 24,
+      coords: [58.00087, 56.20999],
+      icon: 'green',
+      title: 'Контейнер №24',
+      percent: 19,
+      img: '07.jpg'
+    },
+    {
+      number: 25,
+      coords: [58.00799, 56.16901],
+      icon: 'green',
+      title: 'Контейнер №25',
+      percent: 2,
+      img: '07.jpg'
+    },
+    {
+      number: 26,
+      coords: [58.00697, 56.19401],
+      icon: 'green',
+      title: 'Контейнер №26',
+      percent: 50,
+      img: '07.jpg'
+    },
+    {
+      number: 27,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №27',
+      percent: 41,
+      img: '07.jpg'
+    },
+    {
+      number: 28,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №28',
+      percent: 35,
+      img: '07.jpg'
+    },
+    {
+      number: 29,
+      coords: [58.00203, 56.23000],
+      icon: 'green',
+      title: 'Контейнер №29',
+      percent: 18,
+      img: '07.jpg'
+    }
+  ],
+* */

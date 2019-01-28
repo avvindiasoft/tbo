@@ -39,6 +39,8 @@
           color="purple"
         />
         -->
+
+        <!--
         <router-link
           v-ripple
           class="toolbar-items"
@@ -46,6 +48,36 @@
         >
           <v-icon color="tertiary">mdi-view-dashboard</v-icon>
         </router-link>
+        -->
+
+        <v-menu bottom left>
+          <v-btn
+            slot="activator"
+            dark
+            icon
+          >
+            <v-badge
+              color="error"
+              overlap
+            >
+              <template slot="badge">
+                {{ this.$store.state.notifsTop.length }}
+              </template>
+              <v-icon color="tertiary">mdi-bell</v-icon>
+            </v-badge>
+          </v-btn>
+          <v-list>
+            <v-list-tile
+              v-for="(item, i) in this.$store.state.notifsTop"
+              :key="i"
+              @click=""
+            >
+              <v-list-tile-title>{{ item }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+
+<!--
         <v-menu
           bottom
           left
@@ -82,6 +114,7 @@
             </v-list>
           </v-card>
         </v-menu>
+        -->
         <!--
         <router-link
           v-ripple
@@ -110,7 +143,13 @@ export default {
     title: null,
     responsive: false,
     responsiveInput: false,
-    titleName: ''
+    titleName: '',
+    items: [
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me 2' }
+    ]
   }),
 
   watch: {
@@ -140,7 +179,7 @@ export default {
   },
 
   mounted () {
-    console.log(this.$store.state.notifsTop);
+    //console.log(this.$store.state.notifsTop);
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
   },

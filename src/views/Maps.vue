@@ -15,19 +15,19 @@
           map-type="map"
           @map-was-initialized="initHandler"
         >
-
+          <!--
                    <ymap-marker
                      marker-type="placemark"
-                     :coords="[57.986220, 56.242261]"
+                     :coords="[57.99390, 56.20500]"
                      :color="red"
                      hint-content="Кронштадская, 88-90"
-                     :draggable="true"
                      :balloon="{header: 'Кронштадская, 88-90', body: 'Бак заполнен на 90%', footer: ''}"
                      :icon="{color: 'green', glyph: 'trash'}"
                      :marker-fill="{color: '#000000', opacity: 0.4}"
                      :marker-stroke="{color: '#ff0000', width: 5}"
                      cluster-name="1"
                    ></ymap-marker>
+                     -->
 
           <!--
                   <ymap-marker
@@ -154,10 +154,6 @@
       return {
         placemarks
       }
-    },
-
-    mounted() {
-
     }
   }
 </script>
