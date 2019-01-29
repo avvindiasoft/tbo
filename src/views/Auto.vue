@@ -39,10 +39,10 @@
 
 
 
+          <!--
+ <v-marker :lat-lng="[58.0030, 56.2075]" :icon="iconMarkers[4]"></v-marker>
 
-            <!--
-          <v-marker :lat-lng="[58.0000, 56.2495]" :icon="iconMarkers[4]"></v-marker>
-            -->
+          -->
 
         </v-map>
       </div>
@@ -148,18 +148,20 @@
       getRoutes: function(auto, num){
         const routes = {
           auto1: [
-              [58.0030, 56.2050],
-              [58.00350, 56.2092], [58.0086, 56.2369], [58.0095, 56.2402], [58.0072, 56.2432], [58.0008, 56.2493],
-              [57.9990, 56.2464], [58.0000, 56.2495], [57.9992, 56.2464]
+            [58.0032, 56.2068],
+            [58.00350, 56.2092], [58.0086, 56.2369],  [58.0095, 56.2402], [58.0072, 56.2432],  [58.0008, 56.2493],
+            [58.0004, 56.2492],  [57.9994, 56.2464],  [57.9993, 56.2458], [57.9950, 56.2496],  [57.9953, 56.2515],
+            [57.9942, 56.2472],  [58.00122, 56.2393], [58.0039, 56.2378], [58.00355, 56.2363], [58.0032, 56.2329],
+            [58.0033, 56.2320],  [58.0039, 56.2317],  [58.0042, 56.2310], [58.0017, 56.21615], [58.0019, 56.21605],
+            [58.00305, 56.2150], [58.0023, 56.2114],  [58.0032, 56.2068]
           ],
           auto2: [
-              [58.0080, 56.2740],
-              [58.00697, 56.2704],  [58.0069, 56.2690],    [58.00923, 56.26650], [58.0096, 56.26545],  [58.00959, 56.26486],
-              [58.00975, 56.26448], [58.009798, 56.26345], [58.00988, 56.26255], [58.00977, 56.26184], [58.00089, 56.2705],
-              [57.9999, 56.2712],   [57.9977, 56.2624],    [58.0038, 56.2554],   [58.0048, 56.2546],   [58.0056, 56.2572],
-              [58.0070, 56.2560],   [58.0095, 56.2538],    [58.0111, 56.2594],   [58.0080, 56.2632],   [58.00865, 56.26705],
-              [58.0070, 56.2689],   [58.0080, 56.2740],
-
+            [58.0080, 56.2740],
+            [58.00697, 56.2704],  [58.0069, 56.2690],    [58.00923, 56.26650], [58.0096, 56.26545],  [58.00959, 56.26486],
+            [58.00975, 56.26448], [58.009798, 56.26345], [58.00988, 56.26255], [58.00977, 56.26184], [58.00089, 56.2705],
+            [57.9999, 56.2712],   [57.9977, 56.2624],    [58.0038, 56.2554],   [58.0048, 56.2546],   [58.0056, 56.2572],
+            [58.0070, 56.2560],   [58.0095, 56.2538],    [58.0111, 56.2594],   [58.0080, 56.2632],   [58.00865, 56.26705],
+            [58.0070, 56.2689],   [58.0080, 56.2740],
           ]
         };
         return { from: routes[auto][num-1], to: routes[auto][num] }
@@ -268,7 +270,7 @@
         iconMarkers.push(icons[r]);
       } );
 
-      const blueContainers = [8, 9, 20, 30, 48, 47, 49, 50, 107];
+      const blueContainers = [8, 9, 20, 30, 47, 49, 50, 107];
       blueContainers.forEach( item => {
         iconMarkers[item] = icons[2];
       } );
@@ -280,7 +282,7 @@
         iconAuto,
         iconMarkers,
         icons,
-        auto1: [58.0030, 56.2050],
+        auto1: [58.0032, 56.2068],
         auto2: [58.0080, 56.2740],
         clusterOptions: {},
         initialLocation: Vue2Leaflet.L.latLng(57.9999, 56.2396),
@@ -293,137 +295,187 @@
       const auto1move = () =>
       {
         //1
-        this.moveTopRight('auto1', 1, 1, () =>
-        {
-          setTimeout(() =>
-          {
-            this.setGreen(8);
-            //2
-            this.moveTopRight('auto1', 2, 3, () =>
-            {
-              setTimeout(() =>
-              {
-                this.setGreen(9);
-                //3
-                this.moveTopRight('auto1', 3, 1, () =>
-                {
-                  /**/
-                  //4
-                  this.moveBottomRight('auto1', 4, 1, () =>
-                  {
-                    setTimeout(() =>
-                    {
-                      this.setGreen(20);
-                      //5
-                      this.moveBottomRight('auto1', 5, 1, () =>
-                      {
-                        setTimeout(() =>
-                        {
-                          this.setGreen(30);
-                          //6
-                          this.moveBottomRight('auto1', 6, 1, () =>
-                          {
-                            //7
-                            this.moveBottomLeft('auto1', 7, 1, () =>
-                            {
-
-                            });
-                          });
-                        }, 1000)
+        this.moveTopRight('auto1', 1, 1, () => { setTimeout(() => {
+          this.setGreen(8);
+          this.setBlue(54);
+          //2
+          this.moveTopRight('auto1', 2, 3, () => { setTimeout(() => {
+            this.setGreen(9);
+            //3
+            this.moveTopRight('auto1', 3, 1, () => {
+              this.setBlue(48);
+              //4
+              this.moveBottomRight('auto1', 4, 1, () => { setTimeout(() => {
+                this.setGreen(20);
+                //5
+                this.moveBottomRight('auto1', 5, 1, () => { setTimeout(() => {
+                  this.setGreen(30);
+                  //6
+                  this.moveBottomRight('auto1', 6, 1, () => {
+                    this.setBlue(13);
+                    //7
+                    this.moveBottomLeft('auto1', 7, 1, () => { setTimeout(() => {
+                      this.setGreen(47);
+                      this.setBlue(18);
+                      //8
+                      this.moveBottomLeft('auto1', 8, 1, () => {
+                        this.setBlue(43);
+                        //9
+                        this.moveBottomRight('auto1', 9, 1, () => {
+                          this.setBlue(42);
+                          //10
+                          this.moveTopRight('auto1', 10, 1, () => { setTimeout(() => {
+                            this.setGreen(48);
+                            //11
+                            this.moveBottomLeft('auto1', 11, 1, () => { setTimeout(() => {
+                              this.setGreen(43);
+                              //12
+                              this.moveTopLeft('auto1', 12, 1, () => { setTimeout(() => {
+                                this.setGreen(42);
+                                //13
+                                this.moveTopLeft('auto1', 13, 1, () => {
+                                  this.setBlue(20);
+                                  //14
+                                  this.moveTopLeft('auto1', 14, 1, () => { setTimeout(() => {
+                                    this.setGreen(18);
+                                    //15
+                                    this.moveBottomLeft('auto1', 15, 1, () => { setTimeout(() => {
+                                      this.setGreen(54);
+                                      //16
+                                      this.moveTopLeft('auto1', 16, 1, () => {
+                                        this.setBlue(9);
+                                        //17
+                                        this.moveTopLeft('auto1', 17, 1, () => {
+                                          this.setBlue(30);
+                                          //18
+                                          this.moveTopLeft('auto1', 18, 1, () => {
+                                            this.setBlue(8);
+                                            //19
+                                            this.moveBottomLeft('auto1', 19, 2, () => {
+                                              this.setBlue(47);
+                                              //20
+                                              this.moveTopLeft('auto1', 20, 1, () => { setTimeout(() => {
+                                                this.setGreen(13);
+                                                //21
+                                                this.moveTopLeft('auto1', 21, 1, () => {
+                                                  this.setBlue(18);
+                                                  //22
+                                                  this.moveBottomLeft('auto1', 22, 1, () => {
+                                                    //23
+                                                    this.moveTopLeft('auto1', 23, 1, () => {
+                                                      auto1move();
+                                                    })
+                                                  })
+                                                })
+                                              }, 7000) })
+                                            })
+                                          })
+                                        })
+                                      })
+                                    }, 7000) }) }, 7000) })
+                                })
+                              }, 7000) })
+                            }, 7000)
+                            })
+                          }, 7000) });
+                        });
                       });
-                    }, 1000)
+                    }, 7000) });
                   });
-                  /* */
+                }, 7000)
                 });
-              }, 100)
+              }, 7000)
+              });
             });
-          }, 100);
+          }, 7000)
+          });
+        }, 7000);
         });
       }
 
       //setTimeout(() => {}, 1000)
 
       const auto2move = () => {
-          //1
-          this.moveBottomLeft('auto2', 1, 1, () => { setTimeout(() => {
-            this.setGreen(107);
-            //2
-            this.moveBottomLeft('auto2', 2, 1, () => {
-              //3
-              this.moveTopLeft('auto2', 3, 1, () => {
-                //4
-                this.moveTopLeft('auto2', 4, 1, () => { setTimeout(() => {
-                  this.setGreen(49);
-                  //5
-                  this.moveTopLeft('auto2', 5, 1, () => {
-                    //6
-                    this.moveTopLeft('auto2', 6, 1, () => {
-                      //7
-                      this.moveTopLeft('auto2', 7, 1, () => {
-                        //8
-                        this.moveTopLeft('auto2', 8, 1, () => {
-                          //9
-                          this.moveTopLeft('auto2', 9, 1, () => {
-                            //10
-                            this.moveBottomRight('auto2', 10, 2, () => { setTimeout(() => {
-                              this.setGreen(50);
-                              //11
-                              this.moveBottomRight('auto2', 11, 1, () => {
-                                this.setBlue(29);
-                                //12
-                                this.moveBottomLeft('auto2', 12, 1, () => {
-                                  this.setBlue(26);
-                                  //13
-                                  this.moveTopLeft('auto2', 13, 1, () => { setTimeout(() => {
-                                    this.setGreen(29);
-                                    //14
-                                    this.moveTopLeft('auto2', 14, 1, () => {
-                                      this.setBlue(106);
-                                      //15
-                                      this.moveTopRight('auto2', 15, 1, () => {
-                                        //16
-                                        this.moveTopLeft('auto2', 16, 1, () => { setTimeout(() => {
-                                          this.setGreen(26);
-                                          //17
-                                          this.moveTopLeft('auto2', 17, 1, () => {
-                                            //18
-                                            this.moveTopRight('auto2', 18, 1, () => {
-                                              //19
-                                              this.moveBottomRight('auto2', 19, 1, () => {
-                                                //20
-                                                this.moveTopRight('auto2', 20, 1, () => {
-                                                  //21
-                                                  this.moveBottomRight('auto2', 21, 1, () => {
-                                                    //22
-                                                    this.moveTopRight('auto2', 22, 1, () => { setTimeout(() => {
-                                                      this.setGreen(106);
-                                                      this.setBlue(107);
-                                                      this.setBlue(49);
-                                                      this.setBlue(50);
-                                                      auto2move();
-                                                    }, 7000) })
-                                                  })
+        //1
+        this.moveBottomLeft('auto2', 1, 1, () => { setTimeout(() => {
+          this.setGreen(107);
+          //2
+          this.moveBottomLeft('auto2', 2, 1, () => {
+            //3
+            this.moveTopLeft('auto2', 3, 1, () => {
+              //4
+              this.moveTopLeft('auto2', 4, 1, () => { setTimeout(() => {
+                this.setGreen(49);
+                //5
+                this.moveTopLeft('auto2', 5, 1, () => {
+                  //6
+                  this.moveTopLeft('auto2', 6, 1, () => {
+                    //7
+                    this.moveTopLeft('auto2', 7, 1, () => {
+                      //8
+                      this.moveTopLeft('auto2', 8, 1, () => {
+                        //9
+                        this.moveTopLeft('auto2', 9, 1, () => {
+                          //10
+                          this.moveBottomRight('auto2', 10, 2, () => { setTimeout(() => {
+                            this.setGreen(50);
+                            //11
+                            this.moveBottomRight('auto2', 11, 1, () => {
+                              this.setBlue(29);
+                              //12
+                              this.moveBottomLeft('auto2', 12, 1, () => {
+                                this.setBlue(26);
+                                //13
+                                this.moveTopLeft('auto2', 13, 1, () => { setTimeout(() => {
+                                  this.setGreen(29);
+                                  //14
+                                  this.moveTopLeft('auto2', 14, 1, () => {
+                                    this.setBlue(106);
+                                    //15
+                                    this.moveTopRight('auto2', 15, 1, () => {
+                                      //16
+                                      this.moveTopLeft('auto2', 16, 1, () => { setTimeout(() => {
+                                        this.setGreen(26);
+                                        //17
+                                        this.moveTopLeft('auto2', 17, 1, () => {
+                                          //18
+                                          this.moveTopRight('auto2', 18, 1, () => {
+                                            //19
+                                            this.moveBottomRight('auto2', 19, 1, () => {
+                                              //20
+                                              this.moveTopRight('auto2', 20, 1, () => {
+                                                //21
+                                                this.moveBottomRight('auto2', 21, 1, () => {
+                                                  //22
+                                                  this.moveTopRight('auto2', 22, 1, () => { setTimeout(() => {
+                                                    this.setGreen(106);
+                                                    this.setBlue(107);
+                                                    this.setBlue(49);
+                                                    this.setBlue(50);
+                                                    auto2move();
+                                                  }, 7000) })
                                                 })
                                               })
                                             })
                                           })
-                                        }, 7000) })
-                                      })
+                                        })
+                                      }, 7000) })
                                     })
-                                  }, 7000) })
-                                })
+                                  })
+                                }, 7000) })
                               })
-                            }, 7000) })
-                          })
+                            })
+                          }, 7000) })
                         })
                       })
                     })
                   })
-                }, 7000) });
-              });
-            }) }, 7000);
-          })
-        }
+                })
+              }, 7000) });
+            });
+          }) }, 7000);
+        })
+      }
 
       auto1move();
       auto2move();
